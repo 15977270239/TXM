@@ -1,8 +1,10 @@
 package com.txm.www;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,9 +24,12 @@ public class MainActivity extends Activity implements TencentLocationListener{
         setContentView(R.layout.activity_main);
         city = (TextView)findViewById(R.id.city);
         district = (TextView)findViewById(R.id.aear);
-        for (int i=0;i<20;i++){
-            int num = i;
-        }
+        district.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,MapActivity.class));
+            }
+        });
         mLocationManager = TencentLocationManager.getInstance(this);
         mLocationManager.setCoordinateType(TencentLocationManager.COORDINATE_TYPE_GCJ02);
         TencentLocationRequest request = TencentLocationRequest.create()
