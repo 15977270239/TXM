@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.txm.www"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'x86', 'x86_64', 'arm64-v8a', 'mips64'
+        }
+//        manifestPlaceholders
+//        [
+//                //SIZBZ-VEGCV-NQWPP-UFBQY-CIUKV-X3F34
+//                //OPSBZ-7REH6-IW5SY-MBVK5-A2IB5-FZBMU  我的key
+//                TENCENT_MAP_APPKEY: "OPSBZ-7REH6-IW5SY-MBVK5-A2IB5-FZBMU",
+//        ]
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    compile files('libs/TencentLocationSDK_v5.0.1_r251203_170116_1729.jar')
+    compile files('libs/TencentMapSDK_Vector_v_3.0.6.jar')
+}
